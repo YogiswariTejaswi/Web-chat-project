@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuickChat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="chat-box" style="border:1px solid #ccc; height:300px; overflow-y:scroll; padding:10px;">
+        <!-- Messages appear here -->
+    </div>
+    <input type="text" id="user-message" placeholder="Type a message...">
+    <button id="send-btn">Send</button>
+
+    <script>
+        $(document).ready(function() {
+            var socket = io();
+
+            // When the 'Send' button is clicked
+            $('#send-btn').on('click', function() {
+                socket.send($('#user-message').val());
+                $('#user-message').val('');
+            });
+
+            // When a new message is received from the server
+            socket.on('message', function(msg) {
+                $('#chat-box').append('<p>' + msg + '</p>');
+            });
+        });
+    </script>
+</body>
+</html>
