@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatRoom</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+
+  <!-- JOIN SCREEN -->
+  <div id="join-screen">
+    <div class="join-card">
+      <div class="logo-mark">◈</div>
+      <h1>ChatRoom</h1>
+      <p class="tagline">Real-time. No frills. Just talk.</p>
+      <div class="input-group">
+        <input
+          type="text"
+          id="username-input"
+          placeholder="Enter your name"
+          maxlength="20"
+          autocomplete="off"
+        />
+        <button id="join-btn" onclick="joinChat()">Join →</button>
+      </div>
+      <span id="join-error" class="error-msg"></span>
+    </div>
+  </div>
+
+  <!-- CHAT SCREEN -->
+  <div id="chat-screen" class="hidden">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="logo-mark small">◈</span>
+        <span class="app-name">ChatRoom</span>
+      </div>
+      <div class="sidebar-section">
+        <p class="sidebar-label">Online</p>
+        <ul id="user-list"></ul>
+      </div>
+      <button class="leave-btn" onclick="leaveChat()">← Leave</button>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <div>
+          <h2 id="room-title"># general</h2>
+          <span id="online-count" class="online-badge">1 online</span>
+        </div>
+      </header>
+
+      <div id="messages" class="messages-container">
+        <div class="welcome-msg">Welcome! Say hello 👋</div>
+      </div>
+
+      <div id="typing-indicator" class="typing-indicator hidden"></div>
+
+      <div class="input-bar">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Type a message..."
+          maxlength="500"
+          autocomplete="off"
+        />
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="/static/chat.js"></script>
+</body>
+</html>
